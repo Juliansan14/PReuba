@@ -1,5 +1,7 @@
 <?php
 
+use App\producto;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -51,3 +53,31 @@ Route::get('arreglosm',function(){
         //echo"<hr/>";
     //}
 //});
+
+route::get("pruebaprod", function(){
+//inserta producto
+$p = new producto();
+//crear atributo
+$p->nombre = 'bicicleta';
+$p->valor_unitario = 450.897;
+//guardar en db:
+$p->save();
+});
+
+route::get("nuevoproducto",function(){
+//mostrar formulario a guardar:
+return view('producto.crear');
+
+});
+
+
+route::post("guardarproducto",function(){
+    //echo"<pre>";
+      //  vard_dump($_POST);
+    //echo"</pre>";
+$p = new producto();
+$p->nombre = $_POST["nombre"];
+$p->valor_unitario = $_POST["valor"];
+$p->save();
+echo"Exito Producto guardado";
+});
